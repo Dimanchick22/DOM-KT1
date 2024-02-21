@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+      }
+
+      #table {
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+        min-width: 40px;
+      }
+
+      .color {
+        background-color: orange;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="table"></table>
+    <script>
+      let table = document.getElementById("table");
+      let numbers = [];
+      for (var i = 0; i < 30; i++) {
+        numbers.push(Math.floor(Math.random() * 100));
+      }
+      let chect = 0;
+      for (let i = 0; i < 5; i++) {
+        let row = table.insertRow();
+        for (let j = 0; j < 6; j++) {
+          let cell = row.insertCell();
+          let number = numbers[chect];
+          cell.textContent = number;
+          if (number >= 50) {
+            cell.classList.add("color");
+          }
+          chect++;
+        }
+      }
+      function foo() {
+        let newnumber = Math.floor(Math.random() * 100);
+        let table = document.getElementById("table");
+        let cellnew = document.createElement("td");
+        cellnew.textContent = newnumber;
+        if (newnumber >= 50) {
+          cellnew.classList.add("color");
+        }
+        let chectnew = table.getElementsByTagName("td").length;
+        let rowchect = Math.floor(chectnew / 6);
+        if (!table.rows[rowchect]) {
+          table.insertRow(rowchect);
+        }
+        table.rows[rowchect].appendChild(cellnew);
+      }
+    </script>
+    <button onclick="foo()">Добавить число</button>
+  </body>
+</html>
